@@ -1,0 +1,17 @@
+name: concurrency-workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Main
+          run: |
+            git clone https://github.com/serde-rs/serde.git
+            cd serde
+            cargo build
+            cd ..
+            rm -rf serde
