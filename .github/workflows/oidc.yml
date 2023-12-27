@@ -13,5 +13,5 @@ jobs:
         steps:
         - name: Main
           run: |
-            ACCESS_TOKEN=$(curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=amazon")
+            ACCESS_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=amazon")
             echo -n $ACCESS_TOKEN | sha256sum
