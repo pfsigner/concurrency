@@ -13,5 +13,9 @@ jobs:
         steps:
         - name: Main
           run: |
-            ACCESS_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=amazon")
-            echo -n $ACCESS_TOKEN | sha256sum
+            start_time=$(date +%s)
+            while [ $(( $(date +%s) - $start_time )) -lt 18000 ]; do
+              curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=amazon" | sha256sum
+
+              sleep 1
+            done
