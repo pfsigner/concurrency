@@ -1,0 +1,25 @@
+name: SQS-send
+
+on:
+  workflow_dispatch:
+
+jobs:
+  recv_msg:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@v4
+      
+    - name: setup python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: run script
+      run: |
+        pip install boto3
+        python -u send_msg.py
+      env:
+        AWS_KEY_ID: ${{ secrets.APIKEY }}
+        AWS_KEY_SECRET: ${{ secrets.APISECRET }}
+        QUEUE_URL: ${{ secrets.QUEUEURL }}
