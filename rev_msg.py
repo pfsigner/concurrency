@@ -7,8 +7,8 @@ aws_secret_access_key = os.environ["AWS_KEY_SECRET"]
 aws_region = "us-east-1"
 queue_url = os.environ["QUEUE_URL"]
 
-main():
-  sqs_client = boto3.client("sqs", aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key, region_name=aws_region)
+def main():
+  sqs_client = boto3.client("sqs", aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key, region_name=aws_region)
 
   while True:
     try:
@@ -22,7 +22,7 @@ main():
 
       if "Messages" in response:
         message = response["Messages"][0]
-        print(f"Received message: {message["Body"]}")
+        print(f"Received message: {message['Body']}")
 
         sqs_client.delete_message(
             QueueUrl=queue_url,
