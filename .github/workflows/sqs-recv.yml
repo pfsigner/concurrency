@@ -1,4 +1,4 @@
-name: SQS
+name: SQS-recv
 
 on:
   workflow_dispatch:
